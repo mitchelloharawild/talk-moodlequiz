@@ -11,6 +11,12 @@
 Slides and notes for a presentation about moodlequiz at the 11th
 Australian Conference on Teaching Statistics (OZCOTS 2023).
 
+Authored by:
+* Mitchell O'Hara-Wild (presenting author)
+* Emi Tanaka
+* Thomas Fung
+* Iris Jiang
+
 #### Abstract
 
 E-learning quizzes with automated marking systems allow educators to
@@ -41,7 +47,7 @@ learning management platforms.
 
 #### Format
 
-10-15 minute presentation.
+12 minute presentation, 3 minutes for questions.
 
 #### Bio
 
