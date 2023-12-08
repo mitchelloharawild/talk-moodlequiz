@@ -1,0 +1,144 @@
+---
+from: markdown+emoji
+execute: 
+  cache: true
+format: 
+  letterbox-revealjs:
+    theme: [default, theme.scss]
+    progress: false
+    menu: false
+    width: 1280
+    height: 720
+filters:
+  - custom-callouts
+callout-appearance: simple
+bibliography: citations.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| include: false
+```
+
+## {}
+
+::: columns
+::: {.column width="40%"}
+:::
+::: {.column width="60%"}
+
+::: {.title data-id="title"}
+Creating flexible e-learning quizzes with literate programming
+:::
+
+::: {.dateplace}
+15th December 2023 @ OZCOTS
+:::
+
+##### Mitchell O'Hara-Wild
+
+::: {.callout-link}
+
+## Useful links
+
+![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/)
+
+![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/moodlequiz](https://slides.mitchelloharawild.com/moodlequiz)
+
+![](resources/github.svg){.icon} [mitchelloharawild/talk-moodlequiz](https://github.com/mitchelloharawild/talk-moodlequiz)
+
+:::
+
+:::
+:::
+
+![](backgrounds/amjd-rdwan--MDJDYKQz6E-unsplash.jpg){.image-left}
+
+## {}
+<!-- Talk Abstract: 
+E-learning quizzes with automated marking systems allow educators to assess students' abilities, motivate learning, give automatic and instant feedback, and are scalable to a large number of students. Many quiz questions prevalent in teaching statistics use numerical and single/multiple choice responses. These types of questions can be algorithmically generated to create multiple versions of the question with different instances of randomised tasks, datasets and/or inputs. In practice, quiz creators must conform to a constrained and/or rigid structure due to the limitations of the deployment platform, which may not align with the natural order of thinking.
+
+In this talk, I provide a higher-order overview of creating algorithmic e-learning quizzes and propose a set of literate programming design principles for a robust, yet flexible system to create these quizzes. The design of this system is implemented in the moodlequiz R package for the free and open-source learning management platform Moodle. The core set of literate programming design principles can be extended to other learning management platforms. 
+ -->
+
+
+### E-learning quizzes
+
+::: columns
+::: {.column width="60%"}
+:::
+:::
+
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+<!-- ## Thanks for your time! -->
+
+<!-- ::: columns -->
+<!-- ::: {.column width="60%"} -->
+
+<!-- ::: {.callout-tip} -->
+<!-- ## Final remarks -->
+
+<!-- * Think about the design of packages you make or use. -->
+<!-- * Try forecasting with fable, it's easy by design! -->
+<!-- * Let's chat during the break - especially if it's about about software, teaching, forecasting or permaculture. -->
+<!-- ::: -->
+
+<!-- ::: {.callout-link} -->
+<!-- ## Useful links -->
+
+<!-- ![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/) -->
+
+<!-- ![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/moodlequiz](https://slides.mitchelloharawild.com/moodlequiz) -->
+
+<!-- ![](resources/github.svg){.icon} [mitchelloharawild/talk-moodlequiz](https://github.com/mitchelloharawild/talk-moodlequiz) -->
+<!-- ::: -->
+
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ![](backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg){.image-right} -->
+
+<!-- Made with :heart: and [Quarto](https://quarto.org/). -->
+
+
+## Unsplash credits
+
+::: {.callout-unsplash}
+
+## Thanks to these Unsplash contributors for their photos
+
+```{r unsplash}
+#| echo: FALSE
+#| cache: TRUE
+library(httr)
+library(purrr)
+unsplash_pattern <- ".*-(.{11})-unsplash\\.jpg$"
+slides <- readLines("index.qmd")
+backgrounds <- slides[grepl("backgrounds/.+?unsplash.jpg", slides)]
+images <- unique(sub(".*\\(backgrounds/(.+?)\\).*", "\\1", backgrounds))
+images <- images[grepl(unsplash_pattern, images)]
+ids <- sub(unsplash_pattern, "\\1", images)
+
+get_unsplash_credit <- function(id) {
+  unsplash_url <- "https://api.unsplash.com/" 
+  my_response <- httr::GET(unsplash_url, path = c("photos", id), query = list(client_id=Sys.getenv("UNSPLASH_ACCESS")))
+  xml <- content(my_response)
+  
+  name <- xml$user$name
+  desc <- xml$description%||%"Photo"
+  sprintf(
+    "* %s: [%s%s](%s)",
+    name,
+    strtrim(desc,60-nchar(name)),
+    if(nchar(desc)>(60-nchar(name))) "..." else "",
+    modify_url("https://unsplash.com/", path = file.path("photos", xml$id))
+  )
+}
+htmltools::includeMarkdown(paste0(map_chr(ids, get_unsplash_credit), collapse = "\n"))
+```
+
+:::
+
+<!-- ## References -->
