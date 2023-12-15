@@ -314,7 +314,7 @@ The *exams* package for R has been on CRAN for **over 15 years**!
 
 *How it works*
 
-``` {.markdown include="demo/demo.Rmd" filename="demo.Rmd [88 lines]"}
+``` {.markdown include="demo/completed.Rmd" filename="demo.Rmd [88 lines]"}
 ```
 
 :::
