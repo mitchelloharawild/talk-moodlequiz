@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "",
+    "section": "",
+    "text": "Creating flexible e-learning quizzes with literate programming\n\n\n15th December 2023 @ OZCOTS, Wollongong\n\nMitchell O’Hara-Wild\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n slides.mitchelloharawild.com/moodlequiz\n mitchelloharawild/talk-moodlequiz"
+  },
+  {
+    "objectID": "index.html#section-1",
+    "href": "index.html#section-1",
+    "title": "",
+    "section": "",
+    "text": "Show of hands 🙌\nKeep your hands up you have…\n\nused a learning management system (LMS)\nused Moodle before\ntried making a Moodle quiz\nsuccessfully made a Moodle quiz before\n\n\n\n\n\n\n\n\nMaking Moodle quizzes isn’t hard\n\n\nHowever it is tedious and limits flexibility for creating good quizzes for teaching statistics"
+  },
+  {
+    "objectID": "index.html#section-2",
+    "href": "index.html#section-2",
+    "title": "",
+    "section": "",
+    "text": "Why Moodle?\n\n\n\n\n\n\n\n🎓 I use it at Monash University\n\n\nI want to make my life easier when assessing students!\n\n\n\n\n\n\n\n\n🎉 It’s free and open source\n\n\nMy software is also free and open source!\nThis improves accessibility."
+  },
+  {
+    "objectID": "index.html#section-3",
+    "href": "index.html#section-3",
+    "title": "",
+    "section": "",
+    "text": "Demo: creating a quiz in Moodle\n\n\n\n\n\nCreating a quiz question in Moodle"
+  },
+  {
+    "objectID": "index.html#section-4",
+    "href": "index.html#section-4",
+    "title": "",
+    "section": "",
+    "text": "Literate programming quizzes\n\n\n\n\n\n\n\n\nLiterate programming\n\n\nAn approach for creating documents or code using both writing and code in the same place\n\nFor R users, you might know this as Sweave/RMarkdown\nFor Python users, you probably think about notebooks\n\n\n\n\n\n\n\n\n\n\n\nStatistics education ❤️ Literate programming\n\n\nLiterate programming for statistical quizzes is a great match! We work closely with data and code, and want to test students on these skills"
+  },
+  {
+    "objectID": "index.html#section-5",
+    "href": "index.html#section-5",
+    "title": "",
+    "section": "",
+    "text": "Literate programming quizzes\n\n\n\n\n\n💥 This isn’t a new idea!\n\n\nexams package v0.9.0 2008-11-10 https://cran.r-project.org/src/contrib/Archive/exams/ https://www.r-exams.org/\nR/exams"
+  },
+  {
+    "objectID": "index.html#section-6",
+    "href": "index.html#section-6",
+    "title": "",
+    "section": "",
+    "text": "Future work\n\n\n\n\n✍️ Create a quarto template for Moodle XML\n\n\nAllows use of quarto extensions and better support for other programming languages.\n\n\n\n\n\n\n\n\n🧑‍🏫 Support quiz formats for other LMS\n\n\nConceptually literate programming of quizzes isn’t specific to Moodle.\n\n\n\n\n\n\n\n\n🧑‍💻 Add capability of running code in the quiz\n\n\nUsing WebAssembly (WASM) we can run code in the web browser alongside a quiz."
+  },
+  {
+    "objectID": "index.html#thanks-for-your-time",
+    "href": "index.html#thanks-for-your-time",
+    "title": "",
+    "section": "Thanks for your time!",
+    "text": "Thanks for your time!\n\n\n\n\n\n\n\n\nFinal remarks\n\n\n\nUse literate programming for teaching statistics\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n slides.mitchelloharawild.com/moodlequiz\n mitchelloharawild/talk-moodlequiz"
+  },
+  {
+    "objectID": "index.html#unsplash-credits",
+    "href": "index.html#unsplash-credits",
+    "title": "",
+    "section": "Unsplash credits",
+    "text": "Unsplash credits\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\namjd rdwan: beautiful colors\nSindy Süßengut: Photo\nIsabela Kronemberger: set of tools\nMax Saeling: Photo"
+  }
+]
