@@ -9,6 +9,7 @@ format:
     height: 720
 filters:
   - custom-callouts
+  - include-code-files
 callout-appearance: simple
 bibliography: citations.bib
 editor_options: 
@@ -171,17 +172,155 @@ Literate programming for statistical quizzes is a **great match**! We work close
 ::: {.column width="60%"}
 
 :::{.callout-caution icon=false}
-## :boom: This isn't a new idea!
+## :boom: This isn't a new idea...
 
-exams package v0.9.0 2008-11-10
+The *exams* package for R has been on CRAN for **over 15 years**!
 
-R/exams
+:::{.fragment .fade-up}
+
+![](resources/r-exams.png)
+
+*Lots of information at <https://www.r-exams.org/>*
+:::
+
 :::
 
 :::
 :::
 
 ![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+::: {.column width="60%"}
+
+### Literate programming quizzes
+
+*Why re-invent the R/exams wheel?*
+
+:::{.callout-tip icon=false}
+## :white_check_mark: It ticks a lot of boxes
+
+* Uses R Markdown to create *dynamic* questions with code
+* Supports random repetition of quiz questions
+* Outputs to Moodle, Canvas, OpenOlat, or Blackboard
+
+:::
+
+:::{.fragment .fade-up}
+
+:::{.callout-caution icon=false}
+## :x: But it leaves some things to be desired
+
+* Defining questions, answers, and feedback is difficult
+* Each question requires separate R Markdown documents
+
+:::
+
+:::
+
+:::
+:::
+
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+::: {.column width="60%"}
+
+### Literate programming quizzes
+
+*Using R/exams*
+
+``` {.markdown include="resources/rexams_boxhist.Rmd" filename="boxhist.Rmd [106 lines]"}
+```
+
+:::
+:::
+
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+::: {.column width="60%"}
+
+### Literate programming quizzes
+
+*Using R/exams*
+
+![](resources/rexams_boxhist.png)
+
+:::
+:::
+
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+
+### Introducing moodlequiz!
+
+
+:::{.callout-tip icon=false}
+## :white_check_mark: Literate programming for quizzes with literate questions
+
+* Questions are specified within the writing
+* An entire quiz with multiple questions in one file 
+* Consistent with R Markdown and Quarto writing style
+* Prioritises creation of `cloze` question types
+* Supports random repetition of quiz questions
+
+:::
+
+:::{.fragment .fade-up}
+
+:::{.callout-caution icon=false}
+## :x: Some downsides (and future work)
+
+* Only outputs *Moodle XML* (but can work in other LMS).
+* In early development, things will change and break.
+* Available on GitHub, about to be published on CRAN.
+
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/david-pisnoy-46juD4zY1XA-unsplash.jpg){.image-left}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+
+### Introducing moodlequiz!
+
+*How it works*
+
+``` {.markdown include="demo/demo.Rmd" filename="demo.Rmd [88 lines]"}
+```
+
+:::
+:::
+
+![](backgrounds/david-pisnoy-46juD4zY1XA-unsplash.jpg){.image-left}
 
 
 ## {}
@@ -232,7 +371,9 @@ Using WebAssembly (WASM) we can run code in the web browser alongside a quiz.
 ::: {.callout-tip}
 ## Final remarks
 
-* Use literate programming for teaching statistics
+* If you use literate programming for communicating statistics, use it for teaching statistics too!
+* Set low-pressure quizzes to track student performance, and give feedback at scale.
+* Try it out, install the package from GitHub with `install_github("numbats/moodlequiz")`
 :::
 
 ::: {.callout-link}

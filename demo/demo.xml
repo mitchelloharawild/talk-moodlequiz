@@ -8,7 +8,7 @@
 ]]></text>
 </questiontext>
 
-<category><text>$course$/penguins</text></category>
+<category><text>$course$/penguins-demo</text></category>
 </question>
 
 <question type="category">
@@ -19,7 +19,7 @@
 </questiontext>
 
 <name><text>Basics</text></name>
-<category><text>$course$/penguins/basics</text></category>
+<category><text>$course$/penguins-demo/basics</text></category>
 </question>
 
 <question type="description">
