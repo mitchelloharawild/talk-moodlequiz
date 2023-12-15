@@ -4,3 +4,5 @@
 .Ruserdata
 index_cache
 index_files
+_site
+/.quarto/

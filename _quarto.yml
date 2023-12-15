@@ -1,0 +1,7 @@
+project:
+  type: website
+  render:
+    - "index.qmd"
+
+from: markdown+emoji
+format: letterbox-revealjs
