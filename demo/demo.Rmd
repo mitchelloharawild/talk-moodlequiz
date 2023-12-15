@@ -1,0 +1,27 @@
+---
+title: Learning with penguins
+output: 
+  moodlequiz::moodlequiz:
+    replicates: 1
+moodlequiz:
+  category: penguins
+---
+
+## Introduction
+
+```{r setup, include = FALSE}
+library(moodlequiz)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+### Meet the penguins!
+
+![The Palmer Archipelago penguins. Artwork by @allison_horst.](lter_penguins.png)
+
+> The `palmerpenguins` data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.
+
+```{r data, echo = TRUE}
+library(palmerpenguins)
+penguins
+```
+

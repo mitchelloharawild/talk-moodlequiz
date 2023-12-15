@@ -1,7 +1,5 @@
 ---
 from: markdown+emoji
-execute: 
-  cache: true
 format: 
   letterbox-revealjs:
     theme: [default, theme.scss]
@@ -33,7 +31,7 @@ Creating flexible e-learning quizzes with literate programming
 :::
 
 ::: {.dateplace}
-15th December 2023 @ OZCOTS
+15th December 2023 @ OZCOTS, Wollongong 
 :::
 
 ##### Mitchell O'Hara-Wild
@@ -56,52 +54,201 @@ Creating flexible e-learning quizzes with literate programming
 ![](backgrounds/amjd-rdwan--MDJDYKQz6E-unsplash.jpg){.image-left}
 
 ## {}
-<!-- Talk Abstract: 
-E-learning quizzes with automated marking systems allow educators to assess students' abilities, motivate learning, give automatic and instant feedback, and are scalable to a large number of students. Many quiz questions prevalent in teaching statistics use numerical and single/multiple choice responses. These types of questions can be algorithmically generated to create multiple versions of the question with different instances of randomised tasks, datasets and/or inputs. In practice, quiz creators must conform to a constrained and/or rigid structure due to the limitations of the deployment platform, which may not align with the natural order of thinking.
 
-In this talk, I provide a higher-order overview of creating algorithmic e-learning quizzes and propose a set of literate programming design principles for a robust, yet flexible system to create these quizzes. The design of this system is implemented in the moodlequiz R package for the free and open-source learning management platform Moodle. The core set of literate programming design principles can be extended to other learning management platforms. 
- -->
+::: columns
 
+::: {.column width="40%"}
+:::
 
-### E-learning quizzes
+::: {.column width="60%"}
+
+### Show of hands :raised_hands:
+
+Keep your hands up you have...
+
+* [used a learning management system (LMS)]{.fragment}
+* [used Moodle before]{.fragment}
+* [tried making a Moodle quiz]{.fragment}
+* [*successfully* made a Moodle quiz before]{.fragment}
+
+:::{.fragment .fade-up}
+:::{.callout-tip}
+## Making Moodle quizzes isn't hard
+
+However it is **tedious** and **limits flexibility** for creating good quizzes for teaching statistics
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/sindy-sussengut-IcycHW9DveY-unsplash.jpg){.image-left}
+
+## {}
+
+### Why Moodle?
 
 ::: columns
 ::: {.column width="60%"}
+
+![](resources/moodle-logo.png){width="50%"}
+
+:::{.fragment .fade-up}
+:::{.callout-tip icon=false}
+## :mortar_board: I use it at Monash University
+
+I want to make my life easier when assessing students!
+:::
+:::
+
+:::{.fragment .fade-up}
+:::{.callout-tip icon=false}
+## :tada: It's free and open source
+
+My software is also free and open source! 
+
+This improves accessibility.
+:::
+:::
+
+
+
+:::
+:::
+
+![](backgrounds/ivan-aleksic-PDRFeeDniCk-unsplash.jpg){.image-right}
+
+
+## {}
+
+### Demo: creating a quiz in Moodle
+
+::: columns
+::: {.column width="60%"}
+![Creating a quiz question in Moodle](resources/moodle-question.png)
+:::
+:::
+
+![](backgrounds/ivan-aleksic-PDRFeeDniCk-unsplash.jpg){.image-right}
+
+## {}
+
+### Literate programming quizzes
+
+::: columns
+::: {.column width="60%"}
+
+:::{.callout-note}
+## *Literate programming*
+
+An approach for creating documents *or* code using **both writing and code** in the **same place**
+
+:::{.fragment}
+*For R users, you might know this as Sweave/RMarkdown*
+
+*For Python users, you probably think about notebooks*
+:::
+:::
+
+:::{.fragment .fade-up}
+:::{.callout-tip}
+## Statistics education :heart: Literate programming
+
+Literate programming for statistical quizzes is a **great match**! We work closely with data and code, and want to test students on these skills
+:::
+:::
+
 :::
 :::
 
 ![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
 
-<!-- ## Thanks for your time! -->
+## {}
 
-<!-- ::: columns -->
-<!-- ::: {.column width="60%"} -->
+### Literate programming quizzes
 
-<!-- ::: {.callout-tip} -->
-<!-- ## Final remarks -->
+::: columns
+::: {.column width="60%"}
 
-<!-- * Think about the design of packages you make or use. -->
-<!-- * Try forecasting with fable, it's easy by design! -->
-<!-- * Let's chat during the break - especially if it's about about software, teaching, forecasting or permaculture. -->
-<!-- ::: -->
+:::{.callout-caution icon=false}
+## :boom: This isn't a new idea!
 
-<!-- ::: {.callout-link} -->
-<!-- ## Useful links -->
+exams package v0.9.0 2008-11-10
 
-<!-- ![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/) -->
+R/exams
+:::
 
-<!-- ![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/moodlequiz](https://slides.mitchelloharawild.com/moodlequiz) -->
+:::
+:::
 
-<!-- ![](resources/github.svg){.icon} [mitchelloharawild/talk-moodlequiz](https://github.com/mitchelloharawild/talk-moodlequiz) -->
-<!-- ::: -->
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
 
-<!-- ::: -->
-<!-- ::: -->
 
-<!-- ![](backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg){.image-right} -->
+## {}
 
-<!-- Made with :heart: and [Quarto](https://quarto.org/). -->
+::: columns
 
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+
+### Future work
+
+:::{.fragment .fade-up}
+:::{.callout-tip icon=false}
+## :writing_hand: Create a quarto template for Moodle XML
+
+Allows use of quarto extensions and better support for other programming languages.
+:::
+:::
+
+:::{.fragment .fade-up}
+:::{.callout-tip icon=false}
+## :teacher: Support quiz formats for other LMS
+
+Conceptually literate programming of quizzes isn't specific to Moodle.
+:::
+:::
+
+:::{.fragment .fade-up}
+:::{.callout-tip icon=false}
+## :technologist: Add capability of running code in the quiz
+
+Using WebAssembly (WASM) we can run code in the web browser alongside a quiz.
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/chris-lee-70l1tDAI6rM-unsplash.jpg){.image-left}
+
+## Thanks for your time!
+
+::: columns
+::: {.column width="60%"}
+
+::: {.callout-tip}
+## Final remarks
+
+* Use literate programming for teaching statistics
+:::
+
+::: {.callout-link}
+## Useful links
+
+![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/)
+
+![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/moodlequiz](https://slides.mitchelloharawild.com/moodlequiz)
+
+![](resources/github.svg){.icon} [mitchelloharawild/talk-moodlequiz](https://github.com/mitchelloharawild/talk-moodlequiz)
+:::
+
+:::
+:::
+
+![](backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg){.image-right}
 
 ## Unsplash credits
 

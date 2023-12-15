@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # Creating flexible e-learning quizzes with literate programming
 
 ### OZCOTS presentation (2023-12-15)
@@ -40,10 +37,15 @@ learning management platforms.
 
 #### Structure
 
-- Literate programming
-- Current approaches
+- Introduction
+- Moodle quizzes
+- Why Moodle? (Own use, open source, question imports)
+- Improved quiz creation
+- Literate programming in teaching statistics
+- Introducing moodlequiz
 - Use for writing quizzes
-- Use for writing assessment
+- Randomisation
+- Future work (Quarto, other platform formats)
 
 #### Format
 
