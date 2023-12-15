@@ -39,11 +39,46 @@
     "href": "index.html#section-5",
     "title": "",
     "section": "",
-    "text": "Literate programming quizzes\n\n\n\n\n\n💥 This isn’t a new idea!\n\n\nexams package v0.9.0 2008-11-10 https://cran.r-project.org/src/contrib/Archive/exams/ https://www.r-exams.org/\nR/exams"
+    "text": "Literate programming quizzes\n\n\n\n\n\n💥 This isn’t a new idea…\n\n\nThe exams package for R has been on CRAN for over 15 years!\n\n\nLots of information at https://www.r-exams.org/"
   },
   {
     "objectID": "index.html#section-6",
     "href": "index.html#section-6",
+    "title": "",
+    "section": "",
+    "text": "Literate programming quizzes\nWhy re-invent the R/exams wheel?\n\n\n\n✅ It ticks a lot of boxes\n\n\n\nUses R Markdown to create dynamic questions with code\nSupports random repetition of quiz questions\nOutputs to Moodle, Canvas, OpenOlat, or Blackboard\n\n\n\n\n\n\n\n\n❌ But it leaves some things to be desired\n\n\n\nDefining questions, answers, and feedback is difficult\nEach question requires separate R Markdown documents"
+  },
+  {
+    "objectID": "index.html#section-7",
+    "href": "index.html#section-7",
+    "title": "",
+    "section": "",
+    "text": "Literate programming quizzes\nUsing R/exams\n\n\nboxhist.Rmd [106 lines]\n\n```{r data generation, echo = FALSE, results = \"hide\"}\n## DATA\nn &lt;- sample(30:50, 1)\nm &lt;- sample(1:4, 1)\ns &lt;- runif(1, 0.5, 2)\ndelta &lt;- ifelse(runif(1) &lt; 0.2, sample(8:12), 0)\np2 &lt;- runif(1, 0.45, 0.55)\nskewed &lt;- left &lt;- FALSE\nif(!delta) {\n    skewed &lt;- runif(1) &lt; 0.6\n    left &lt;- runif(1) &lt; 0.3\n}\n\ndgpBoxhist &lt;- function(n = 40, mean = 0, sd = 1, delta = 0,\n  p2 = 0.5, skewed = FALSE, left = FALSE)\n{\n  SK &lt;- function(x) abs(diff(diff(fivenum(x)[2:4]))/diff(fivenum(x)[c(2, 4)]))\n  sim &lt;- function(x){\n    x &lt;- rnorm(n)\n    if(skewed) exp(x) else x\n  }\n\n  x &lt;- sim()\n  if(skewed) while(SK(x) &lt; 0.7) x &lt;- sim() else while(SK(x) &gt; 0.15) x &lt;- sim()\n  if(left) x &lt;- -x\n\n  x &lt;- mean + sd * scale(x)\n  k &lt;- sample(1:n, round(p2 * n))\n  x[k] &lt;- x[k] + delta\n  as.vector(sample(x))\n}\nx &lt;- round(dgpBoxhist(n = n, mean = m, sd = s, delta = delta, \n  p2 = p2, skewed = skewed, left = left), digits = 2)\n\nb &lt;- boxplot(x, plot = FALSE)\nspread &lt;- tol &lt;- signif(diff(range(c(b$stats, b$out)))/25, 1)\n\nwrite.csv(data.frame(x), file = \"boxhist.csv\", quote = FALSE, row.names = FALSE)\n\n## QUESTION/SOLUTION\nquestions &lt;- solutions &lt;- explanations &lt;- rep(list(\"\"), 6)\ntype &lt;- rep(list(\"schoice\"), 6)\n\nquestions[[1]] &lt;- paste(\"The distribution is \", c(\"\", \"_not_ \"), \"unimodal.\", sep = \"\")\nsolutions[[1]] &lt;- c(delta &lt; 1, delta &gt; 1)\n\nquestions[[2]] &lt;- paste(\"The distribution is\", c(\"symmetric.\", \"right-skewed.\", \"left-skewed.\"))\nsolutions[[2]] &lt;- c(!skewed, skewed & !left, skewed & left)\n    \nquestions[[3]] &lt;- paste(\"The boxplot shows \", c(\"\", \"_no_ \"), \"outliers.\", sep = \"\")\nsolutions[[3]] &lt;- c(length(b$out) &gt; 0, length(b$out) &lt; 1)\n\nquestions[[4]] &lt;- \"A quarter of the observations is smaller than which value?\"\nsolutions[[4]] &lt;- explanations[[4]] &lt;- signif(b$stats[[2]], 3)\ntype[[4]] &lt;- \"num\"\n    \nquestions[[5]] &lt;- \"A quarter of the observations is greater than which value?\"\nsolutions[[5]] &lt;- explanations[[5]] &lt;- signif(b$stats[[4]], 3)\ntype[[5]] &lt;- \"num\"\n\nquestions[[6]] &lt;- paste(\"Half of the observations are\",\n  sample(c(\"smaller\", \"greater\"), 1), \"than which value?\")\nsolutions[[6]] &lt;- explanations[[6]] &lt;- signif(b$stats[[3]], 3)\ntype[[6]] &lt;- \"num\"\n\nexplanations[1:3] &lt;- lapply(solutions[1:3], function(x) ifelse(x, \"True\", \"False\"))\nsolutions[1:3] &lt;- lapply(solutions[1:3], mchoice2string)\nif(any(explanations[4:6] &lt; 0)) explanations[4:6] &lt;- lapply(solutions[4:6], function(x) paste(\"$\", x, \"$\", sep = \"\"))\n```\n\nQuestion\n========\nFor the `r n` observations of the variable `x` in the data file\n[boxhist.csv](boxhist.csv) draw a histogram, a boxplot and a stripchart.\nBased on the graphics, answer the following questions or check the correct\nstatements, respectively. _(Comment: The tolerance for numeric answers is\n$\\pm`r tol`$, the true/false statements are either about correct or clearly wrong.)_\n\n```{r questionlist, echo = FALSE, results = \"asis\"}\nanswerlist(unlist(questions), markup = \"markdown\")\n```\n\nSolution\n========\n\\\n```{r boxplot_hist, echo = FALSE, results = \"hide\", fig.height = 4.5, fig.width = 9, fig.path = \"\", fig.cap = \"\"}\npar(mfrow = c(1, 2))\nboxplot(x, axes = FALSE)\naxis(2, at = signif(b$stats, 3), las = 1)\nbox()\nhist(x, freq = FALSE, main = \"\")\nrug(x)\n```\n\n```{r solutionlist, echo = FALSE, results = \"asis\"}\nanswerlist(unlist(explanations), markup = \"markdown\")\n```\n\nMeta-information\n================\nextype: cloze\nexsolution: `r paste(solutions, collapse = \"|\")`\nexclozetype: `r paste(type, collapse = \"|\")`\nexname: Boxplot and histogram\nextol: `r tol`"
+  },
+  {
+    "objectID": "index.html#section-8",
+    "href": "index.html#section-8",
+    "title": "",
+    "section": "",
+    "text": "Literate programming quizzes\nUsing R/exams"
+  },
+  {
+    "objectID": "index.html#section-9",
+    "href": "index.html#section-9",
+    "title": "",
+    "section": "",
+    "text": "Introducing moodlequiz!\n\n\n\n✅ Literate programming for quizzes with literate questions\n\n\n\nQuestions are specified within the writing\nAn entire quiz with multiple questions in one file\nConsistent with R Markdown and Quarto writing style\nPrioritises creation of cloze question types\nSupports random repetition of quiz questions\n\n\n\n\n\n\n\n\n❌ Some downsides (and future work)\n\n\n\nOnly outputs Moodle XML (but can work in other LMS).\nIn early development, things will change and break.\nAvailable on GitHub, about to be published on CRAN."
+  },
+  {
+    "objectID": "index.html#section-10",
+    "href": "index.html#section-10",
+    "title": "",
+    "section": "",
+    "text": "Introducing moodlequiz!\nHow it works\n\n\ndemo.Rmd [88 lines]\n\n---\ntitle: Learning with penguins\noutput: \n  moodlequiz::moodlequiz:\n    replicates: 1\nmoodlequiz:\n  category: penguins\n---\n\n# Basics\n\n## Introduction\n\n```{r setup, include = FALSE}\nlibrary(moodlequiz)\nknitr::opts_chunk$set(echo = FALSE)\n```\n\n**Meet the penguins!**\n\n![The Palmer Archipelago penguins. Artwork by @allison_horst.](lter_penguins.png)\n\n&gt; The `palmerpenguins` data contains size measurements for three penguin species observed on three islands in the Palmer Archipelago, Antarctica.\n\n```{r data, echo = TRUE}\nlibrary(palmerpenguins)\npenguins\n```\n\n## Plotting weight\n\n**Which penguins are heaviest?**\n\nA summary of the penguins dataset is shown below.\n\n```{r}\nsummary(penguins)\n```\n\nThe average weight of a penguin is `r cloze(mean(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`, which is slightly `r cloze(\"more\", c(\"more\", \"less\"))` than the median weight of `r cloze(median(penguins$body_mass_g, na.rm = TRUE), tolerance = 1)`.\n\nComplete the code to produce the graphic shown in figure \\@ref(fig:boxplot).\n\n```r\nlibrary(ggplot2)\npenguins |&gt; \n  ggplot(aes(x = `r cloze(\"body_mass_g\", colnames(penguins))`, y = `r cloze(\"species\", colnames(penguins))`, fill = `r cloze(\"species\", colnames(penguins))`)) +\n  `r cloze(\"geom_boxplot\")`() +\n  scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"cyan4\")) + \n  theme_minimal()\n```\n\n```{r boxplot, fig.cap=\"Boxplots of penguin weight by species\"}\nlibrary(ggplot2)\npenguins |&gt; \n  ggplot(aes(x = body_mass_g, y = species, fill = species)) +\n  geom_boxplot() +\n  scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"cyan4\")) + \n  theme_minimal()\n```\n\nModify the code to investigate differences in `species` weight by `sex` that produces figure \\@ref(fig:boxplot-sex).\n\n```r\nlibrary(ggplot2)\npenguins |&gt; \n  ggplot(aes(x = `r cloze(\"body_mass_g\", colnames(penguins))`, y = `r cloze(\"sex\", colnames(penguins))`, fill = `r cloze(\"species\", colnames(penguins))`)) +\n  `r cloze(\"geom_boxplot\")`() +\n  scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"cyan4\")) + \n  theme_minimal()\n```\n\n```{r boxplot-sex, fig.cap=\"Boxplots of penguin weight by species and sex\"}\npenguins |&gt; \n  ggplot(aes(x = body_mass_g, y = sex, fill = species)) +\n  geom_boxplot() +\n  scale_fill_manual(values = c(\"darkorange\",\"darkorchid\",\"cyan4\")) + \n  theme_minimal()\n```\n\nMale penguins `r cloze(\"tend to\", c(\"almost always\", \"tend to\"))` weigh `r cloze(\"more\", c(\"more\", \"less\"))` than female penguins. Within each species, male penguins `r cloze(\"almost always\", c(\"almost always\", \"tend to\"))` weigh `r cloze(\"more\", c(\"more\", \"less\"))` than female penguins.\n\n## Telling the story {type=essay}\n\n**Tell the story**\n\nWrite a short paragraph about how a penguin's weight relates to their species and sex."
+  },
+  {
+    "objectID": "index.html#section-11",
+    "href": "index.html#section-11",
     "title": "",
     "section": "",
     "text": "Future work\n\n\n\n\n✍️ Create a quarto template for Moodle XML\n\n\nAllows use of quarto extensions and better support for other programming languages.\n\n\n\n\n\n\n\n\n🧑‍🏫 Support quiz formats for other LMS\n\n\nConceptually literate programming of quizzes isn’t specific to Moodle.\n\n\n\n\n\n\n\n\n🧑‍💻 Add capability of running code in the quiz\n\n\nUsing WebAssembly (WASM) we can run code in the web browser alongside a quiz."
@@ -53,13 +88,13 @@
     "href": "index.html#thanks-for-your-time",
     "title": "",
     "section": "Thanks for your time!",
-    "text": "Thanks for your time!\n\n\n\n\n\n\n\n\nFinal remarks\n\n\n\nUse literate programming for teaching statistics\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n slides.mitchelloharawild.com/moodlequiz\n mitchelloharawild/talk-moodlequiz"
+    "text": "Thanks for your time!\n\n\n\n\n\n\n\n\nFinal remarks\n\n\n\nIf you use literate programming for communicating statistics, use it for teaching statistics too!\nSet low-pressure quizzes to track student performance, and give feedback at scale.\nTry it out, install the package from GitHub with install_github(\"numbats/moodlequiz\")\n\n\n\n\n\n\n\n\n\n\nUseful links\n\n\n social.mitchelloharawild.com\n slides.mitchelloharawild.com/moodlequiz\n mitchelloharawild/talk-moodlequiz"
   },
   {
     "objectID": "index.html#unsplash-credits",
     "href": "index.html#unsplash-credits",
     "title": "",
     "section": "Unsplash credits",
-    "text": "Unsplash credits\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\namjd rdwan: beautiful colors\nSindy Süßengut: Photo\nIsabela Kronemberger: set of tools\nMax Saeling: Photo"
+    "text": "Unsplash credits\n\n\n\n\n\n\nThanks to these Unsplash contributors for their photos\n\n\n\n\n\namjd rdwan: beautiful colors\nSindy Süßengut: Photo\nIvan Aleksic: From the exhibition “The Nineties: A Glossary of…\nIsabela Kronemberger: set of tools\nDavid Pisnoy: Photo\nChris Lee: Behind the leaves.\nMax Saeling: Photo"
   }
 ]
